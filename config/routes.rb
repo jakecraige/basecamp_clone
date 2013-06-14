@@ -1,4 +1,9 @@
 BasecampClone::Application.routes.draw do
+  get "users/new"
+
+  get "home/index"
+  match 'signup' => 'users#new'
+  root :to => "home#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
