@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'gravatar_image_tag'
+gem 'simple_form'
 
 group :development, :test do
   gem 'rspec-rails'
