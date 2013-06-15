@@ -65,5 +65,43 @@ describe "Users" do
     it "should have a password encryped attribute" do
       @user.should respond_to(:encrypted_password)
     end
+    it "should set the encryped password attribute" do
+      @user.encrypted_password.should_not be_blank
+    end
+    describe "has_password? method" do
+      it "should exist" do
+        @user.should respond_to(:has_password?)
+      end
+      it "should return true if pasword match" do
+        @user.has_password?(@attr[:password]).
+          should be_true
+      end
+
+      it "should return false if pasword dont match" do
+        @user.has_password?("invalid").
+          should be_false
+      end
+      it "should have a salt" do
+        @user.should respond_to(:salt)
+      end
+    end
+    describe "Authenticate method" do
+      it "should exist" do
+        User.should respond_to(:authenticate)
+      end
+
+      it "should return nil on user/password mismatch" do
+        User.authenticate(@attr[:email], "pss").should be_nil
+      end
+
+      it "should return nil for email with no user" do
+        User.authenticate("bar@foo.com", @attr[:password]).should be_nil
+      end
+
+      it "should return user on match" do
+        User.authenticate(@attr[:email], @attr[:password]).
+          should == @user
+      end
+    end
   end
 end
