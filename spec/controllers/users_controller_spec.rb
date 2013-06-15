@@ -9,13 +9,17 @@ describe UsersController do
     end
 
     it "should be successful" do
-      get :show, id: @user.id
+      get :show, id: @user
       response.should be_success
     end
 
     it "should find the right user" do
-      get :show, id: @user.id
+      get :show, id: @user
       assigns(:user).should == @user
+    end
+    it "should have username on page" do
+      get :show, id: @user
+      response.should have_selector("h1", @user.name)
     end
   end
   describe "GET 'new'" do
