@@ -17,10 +17,10 @@ describe UsersController do
       get :show, id: @user
       assigns(:user).should == @user
     end
-    it "should have username on page" do
-      get :show, id: @user
-      response.should have_selector("h1", @user.name)
-    end
+    #it "should have the right url in sidebar" do
+      #get :show, id: @user
+      #response.should have_selector("a", href: user_path(@user.id))
+    #end
   end
   describe "GET 'new'" do
     it "should be successful" do
