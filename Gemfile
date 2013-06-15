@@ -10,10 +10,16 @@ gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'childprocess'
+  gem 'spork'
 end
 
 group :test do
   gem 'capybara'
+  gem 'rb-inotify'
+  gem 'libnotify'
 end
 
 # Gems used only for assets and not required
