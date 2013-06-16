@@ -23,5 +23,9 @@ describe "LayoutLinks" do
       visit root_path
       page.should have_link("Profile", href: user_path(@user))
     end
+    it "should have a settings link" do
+      visit root_path
+      page.should have_link("Settings", href: edit_user_path(@user))
+    end
   end
 end

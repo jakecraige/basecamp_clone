@@ -43,14 +43,55 @@ describe UsersController do
         end.should_not change(User, :count)
       end
     end
-    describe "success" do
+  end
+  describe "GET edit" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+      test_sign_in(@user)
+    end
+    it "should be successful" do
+      get :edit, id: @user
+      response.should be_success
+    end
+    # wont work for some reason...
+    #it "should have a gravatar link" do
+      #get :edit, id: @user
+      #response.should have_link("Change", href: "http://gravatar.com/emails")
+    #end
+  end
+  describe "PUT update" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+      test_sign_in(@user)
+    end
+    describe "failure" do
       before(:each) do
-        @attr = { name: "Jake", email: "james.craige@gmail.com",
+        @attr = { name: "", email: "",
+                  password: "", password_confirmation: ""}
+      end
+      it "should render edit page" do
+        put :update, id: @user, user: @attr
+        page.should render_template('edit')
+      end
+    end
+
+    describe "Success" do
+      before(:each) do
+        @attr = { name: "New Name", email: "cat@gmail.com",
                   password: "foobar", password_confirmation: "foobar"}
       end
-      it "should sign the user in" do
-        post :create, user: @attr
-        controller.should be_signed_in
+      it "should change users attributes" do
+        put :update, id: @user, user: @attr
+        user = assigns(:user)
+        @user.reload
+        @user.name.should == user.name
+        @user.email.should == user.email
+        @user.encrypted_password.should == user.encrypted_password
+      end
+
+      it "should have flash message" do
+        put :update, id: @user, user: @attr
+        flash[:success].should =~ /updated/i
       end
     end
   end
