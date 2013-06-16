@@ -25,6 +25,23 @@ describe SessionsController do
         flash.now[:error].should =~ /invalid/i
       end
     end
+    describe "Success" do
+      before :each do
+        @user = FactoryGirl.create(:user)
+        @attr = { email: @user.email, password: @user.password }
+      end
+      
+      it "should sign user in" do
+        post :create, session: @attr
+        # test for sign ins
+        controller.current_user.should == @user
+        controller.should be_signed_in
+      end
+      it "should redirect" do
+        post :create, session: @attr
+        page.should redirect_to(user_path(@user))
+      end
+    end
   end
 
 end
