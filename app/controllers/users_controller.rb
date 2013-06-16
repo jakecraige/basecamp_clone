@@ -8,16 +8,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @title = @user.name
   end
+
   def create
-    #raise params[:user].inspect
     @user = User.new(params[:user])
+
     if @user.save
-      #handle saving
+      redirect_to @user
+      flash[:success] = "Welcome to the BaseCamp Clone!"
     else
       @title = "Sign Up"
       render 'new'
     end
   end
+
   def index
     redirect_to "/users/new"
   end

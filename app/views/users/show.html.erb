@@ -5,6 +5,6 @@
   </div>
   <div class="span3 well">
     <strong>Name: </strong><%= @user.name %><br>
-    <strong>URL: </strong><%= link_to user_path(@user.id) %>
+    <strong>URL: </strong><%= link_to user_path(@user), @user %>
   </div>
 </div>
