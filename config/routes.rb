@@ -1,4 +1,7 @@
 BasecampClone::Application.routes.draw do
+  resources :discussions
+
+
   resources :projects
   resources :sessions, only: [:new, :create, :destroy]
   resources :users

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :projects
+  has_many :discussions
+
   attr_accessor :password
   attr_accessible :email,
                   :name,
