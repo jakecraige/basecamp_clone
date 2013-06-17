@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :projects
   attr_accessor :password
   attr_accessible :email,
                   :name,
