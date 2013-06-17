@@ -55,4 +55,9 @@ describe "Users" do
       end
     end
   end
+  describe "admin attribute" do
+    it "should respond to admin"
+    it "should not be admin by default"
+    it "should be convertible to an admin"
+  end
 end
