@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-
+  # GET /projects
+  # GET /projects.json
   def index
     @projects = Project.all
 
@@ -9,6 +10,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/1
+  # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
 
@@ -18,6 +21,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/new
+  # GET /projects/new.json
   def new
     @project = Project.new
 
@@ -27,14 +32,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
-    redirect_to root_path unless owner?(@project)
   end
 
+  # POST /projects
+  # POST /projects.json
   def create
     @project = Project.new(params[:project])
-    @project.owner = current_user
+
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -46,9 +53,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # PUT /projects/1
+  # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
-    redirect_to root_path unless owner?(@project)
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -61,9 +69,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # DELETE /projects/1
+  # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
-    redirect_to root_path unless owner?(@project)
     @project.destroy
 
     respond_to do |format|
@@ -71,9 +80,4 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  private
-    def owner?(project)
-      current_user.id == project.owner.to_i
-    end
 end

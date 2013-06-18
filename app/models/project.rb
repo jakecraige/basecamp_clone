@@ -1,10 +1,4 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :due, :owner, :status, :title
-  belongs_to :user
-  has_many :discussions
-  validates :title, presence: true
-
-  def owner?(user_id)
-    self.owner == user_id
-  end
+  attr_accessible :description, :due, :status, :title, :user_id
+  has_and_belongs_to_many :users
 end

@@ -1,4 +1,7 @@
 BasecampClone::Application.routes.draw do
+  resources :projects
+
+
   resources :discussions
 
 
