@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :verify_member
+
   # GET /projects
   # GET /projects.json
   def index
@@ -80,4 +82,13 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def verify_member
+      redirect_to root_path unless is_member?(current_user)
+    end
+
+    def is_member?(user)
+      self.user_ids.include?(user.id)
+    end
 end
