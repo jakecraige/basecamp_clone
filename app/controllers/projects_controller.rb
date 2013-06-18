@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :verify_member
+  #before_filter :verify_member
 
   # GET /projects
   # GET /projects.json
