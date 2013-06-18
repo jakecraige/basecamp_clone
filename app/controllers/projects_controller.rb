@@ -89,6 +89,7 @@ class ProjectsController < ApplicationController
     end
 
     def is_member?(user)
-      self.user_ids.include?(user.id)
+      #@project = Project.find(params[:id])
+      #@project.users.all.include?(user)
     end
 end

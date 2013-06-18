@@ -23,7 +23,7 @@ describe DiscussionsController do
   # This should return the minimal set of attributes required to create a valid
   # Discussion. As you add validations to Discussion, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString" } }
+  let(:valid_attributes) { { title: "MyString", message: "Descript" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -79,6 +79,9 @@ describe DiscussionsController do
         post :create, {:discussion => valid_attributes}, valid_session
         response.should redirect_to(Discussion.last)
       end
+
+      it "should belong to a project"
+      it "should belong to a user"
     end
 
     describe "with invalid params" do
