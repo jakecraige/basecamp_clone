@@ -6,7 +6,7 @@ class CreateMemberships < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :memberships, :member_id
+    add_index :memberships, :member_id 
     add_index :memberships, :project_id
   end
 end

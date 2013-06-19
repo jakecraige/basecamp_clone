@@ -1,3 +1,3 @@
-class Memberships < ActiveRecord::Base
+class Membership < ActiveRecord::Base
   attr_accessible :member_id, :project_id
 end

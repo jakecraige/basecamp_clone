@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :discussions
 
+  has_many :memberships, source: :project
+
   attr_accessor :password
   attr_accessible :email,
                   :name,

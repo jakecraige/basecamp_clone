@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Rake::Task['db:reset'].invoke
 user = User.create!(name: "Example User",
              email: "jake@poeticsystems.com",
              password: "foobar",
@@ -21,3 +22,4 @@ user = User.create!(name: "Example User",
 end
 
 user.projects.create(title: "Test Project", description: "This is my description")
+user.projects.create(title: "Test Project 2", description: "This is my second description")
