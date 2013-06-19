@@ -4,8 +4,10 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :discussions
 
-  has_many :members, class_name: "Membership"
+  has_many :memberships, foreign_key: "project_id"
+  has_many :members, through: :memberships, source: :project
 
   validates_presence_of :title
   validates_presence_of :description
+  validates_presence_of :user_id
 end

@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :discussions
 
-  has_many :memberships, source: :project
+  has_many :memberships, foreign_key: "member_id"
+  has_many :member_projects, through: :memberships, source: :project
 
   attr_accessor :password
   attr_accessible :email,
