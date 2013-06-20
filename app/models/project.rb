@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
   has_many :discussions
 
   has_many :memberships, foreign_key: "project_id"
-  has_many :members, through: :memberships, source: :project
+  has_many :members, through: :memberships, source: :user
 
   validates_presence_of :title
   validates_presence_of :description

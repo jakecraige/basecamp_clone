@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619224857) do
+ActiveRecord::Schema.define(:version => 20130620170326) do
 
   create_table "discussions", :force => true do |t|
     t.string   "title"
@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(:version => 20130619224857) do
   end
 
   create_table "memberships", :force => true do |t|
-    t.integer  "member_id"
+    t.integer  "user_id"
     t.integer  "project_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
   add_index "memberships", ["project_id"], :name => "index_memberships_on_project_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_member_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
