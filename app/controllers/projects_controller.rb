@@ -1,10 +1,13 @@
 class ProjectsController < ApplicationController
   #before_filter :verify_member
+  before_filter :authenticate
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    user_projects = current_user.projects
+    member_of = current_user.member_of_project
+    @projects = user_projects << member_of
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,8 +45,8 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(params[:project])
-    @project.members.create
+    #@project = Project.new(params[:project])
+    @project = current_user.projects.create(params[:project])
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }

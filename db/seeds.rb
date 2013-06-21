@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Rake::Task['db:reset'].invoke
-user = User.create!(name: "Example User",
+user = User.create!(name: "Jake Craige",
              email: "jake@poeticsystems.com",
              password: "foobar",
              password_confirmation: "foobar")
@@ -23,3 +23,11 @@ end
 
 user.projects.create(title: "Test Project", description: "This is my description")
 user.projects.create(title: "Test Project 2", description: "This is my second description")
+
+user2 = User.find(2)
+project = user2.projects.create(title: "Test Project User 2 owns", description: "This is my description")
+
+project.members << user
+
+
+
