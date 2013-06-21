@@ -2,11 +2,16 @@ require 'spec_helper'
 
 describe Membership do
   before :each do
-    @user_1 = FactoryGirl.create(:user)
-    @user_2 = FactoryGirl.create(:user, email: "test@test.com")
+    @user_1 = User.create(name: "Jake Craige",
+                          email: "jake@jake.com",
+                          password: "foobar",
+                          password_confirmation: "foobar")
+    @user_2 = User.create(name: "Molly Rivad",
+                          email: "missrivard@jake.com",
+                          password: "foobar",
+                          password_confirmation: "foobar")
+
     @proj_attr = { title: "Test Title", description: "This description" }
-    #@project_1 = @user_1.project.
-    #@project_2 = FactoryGirl.create(:project)
   end
   describe "User project relation" do
     it "should own the project it creates" do

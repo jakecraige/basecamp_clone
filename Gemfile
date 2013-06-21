@@ -22,11 +22,11 @@ end
 
 group :test do
   gem 'capybara'
-  #gem 'rb-inotify'
-  #gem 'libnotify'
+  gem 'rb-inotify'
+  gem 'libnotify'
   gem 'factory_girl_rails'
-  gem 'rb-fsevent', :require => false
-  gem 'growl'
+  #gem 'rb-fsevent', :require => false
+  #gem 'growl'
 end
 
 # Gems used only for assets and not required

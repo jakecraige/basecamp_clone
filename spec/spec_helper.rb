@@ -86,6 +86,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include Capybara::DSL
+  #config.include FactoryGirl::Syntax::Methods
 
   def test_sign_in(user)
     controller.sign_in(user)
