@@ -18,8 +18,8 @@
   <%= @project.due %>
 </p>
 <p>
-  <b>User:</b>
-  <%= @project.user_id %>
+  <b>Creator:</b>
+  <%= User.find(@project.user_id).name %>
 </p>
 
 
@@ -44,10 +44,16 @@
   <tr>
     <td><%= discussion.title %></td>
     <td><%= discussion.message %></td>
-    <td><%= discussion.user_id %></td>
-    <td><%= link_to 'Show', project_discussions_path(discussion) %></td>
-    <td><%= link_to 'Edit', edit_project_discussion_path(discussion.project_id, discussion) %></td>
-    <td><%= link_to 'Destroy', project_discussions_path(discussion), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= User.find(discussion.user_id).name %></td>
+    <td><%= link_to 'Show', 
+              project_discussion_path(discussion.project_id, discussion) %></td>
+    <% if discussion.is_owner?(current_user) %>
+      <td><%= link_to 'Edit', 
+                edit_project_discussion_path(discussion.project_id, discussion) %></td>
+      <td><%= link_to 'Destroy', 
+                project_discussion_path(discussion.project_id, discussion), 
+                method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

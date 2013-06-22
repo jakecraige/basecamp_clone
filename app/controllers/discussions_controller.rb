@@ -24,7 +24,7 @@ class DiscussionsController < ApplicationController
     @discussion.user_id = current_user.id
 
       if @discussion.save
-        redirect_to project_discussion_path(@discussion),
+        redirect_to project_discussion_path(@discussion.project_id, @discussion),
           notice: 'Discussion was successfully created.'
       else
         render action: "new"

@@ -1,11 +1,10 @@
-<h1>Listing projects</h1>
+<h1>My Projects</h1>
 
 <table>
   <tr>
     <th>Title</th>
-    <th>Description</th>
     <th>Due</th>
-    <th>User</th>
+    <th>Creator</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,13 +13,13 @@
 <% current_user.projects.each do |project| %>
   <tr>
     <td><%= project.title %></td>
-    <td><%= project.description %></td>
     <td><%= project.due %></td>
     <td><%= User.find(project.user_id).name %></td>
     <td><%= link_to 'Show', project %></td>
     <% if current_user.id == project.user_id %>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project, 
+                method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
   </tr>
 <% end %>
@@ -28,4 +27,4 @@
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
