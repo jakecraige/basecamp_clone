@@ -8,6 +8,8 @@
 
 Rake::Task['db:reset'].invoke
 
+lorem = Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 # Create Users
 user = User.create!(name: "Jake Craige",
              email: "jake@poeticsystems.com",
@@ -30,15 +32,15 @@ end
 
 # Create Projects
 project1 = user.projects.create(title: "McDaniels",
-                     description: "Create everything for this company.",
+                     description: lorem,
                      due: "2013-08-22")
 project2 = user.projects.create(title: "ConnectOne Security",
-                     description: "Make a website that has blah blah on it",
+                     description: lorem,
                      due: "2013-09-18")
 
 # I don't know why it's making me make it this way.
 project3 = Project.create(title: "CSW Creations Website",
-                                description: "This is my description",
+                                description: lorem,
                                 due: "2013-07-29",
                                 user_id: 2)
 

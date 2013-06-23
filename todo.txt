@@ -1,0 +1,4 @@
+Add limit and see all links to queries on project page
+Add commenting on discussions
+add add members 
+Add content and style profile page
