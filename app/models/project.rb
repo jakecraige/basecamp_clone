@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :user_id
 
-  default_scope order("due DESC")
+  default_scope order("due ASC")
 
   def is_owner?(user)
     user_id == user.id

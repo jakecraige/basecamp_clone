@@ -23,13 +23,22 @@
 
 
 <h3>Owner</h2>
-<p><%= get_name(@project.user_id) %></p>
+<p><%= link_name(@project.user_id) %></p>
 
 <h3>Members</h3>
 <% if @project.members.any? %>
   <% @project.members.each do |member| %>
-    <%= get_name(member.id) %>
+    <%= link_name(member.id) %>
   <% end %>
 <% else %>
   <p>No members just yet...</p>
 <% end %>
+
+<% if @project.is_owner?(current_user) %>
+  <div class="destroy">
+    <%= link_to 'Destroy', @project, 
+      method: :delete, data: { confirm: 'Are you sure?' },
+      class: "btn btn-danger" %>
+  </div>
+<% end %>
+

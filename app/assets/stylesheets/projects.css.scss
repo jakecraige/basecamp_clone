@@ -5,6 +5,24 @@
 .block {
   margin-top: 30px;
 }
+
+.action-index {
+  h1 {
+    float: left;
+  }
+  #add-project-btn {
+    margin-top: 16px;
+    margin-left: 20px;
+  }
+  .projects {
+    table {
+      width: 100%;
+      td {
+        padding: 5px 0;
+      }
+    }
+  }
+}
 .discussions {
   h2 {
     float: left;

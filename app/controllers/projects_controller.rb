@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   def index
     user_projects = current_user.projects
     member_of = current_user.member_of_project
+    @title = "My Projects"
     @projects = user_projects << member_of
   end
 

@@ -8,6 +8,8 @@ class Discussion < ActiveRecord::Base
   validates_presence_of :project_id
   validates_presence_of :user_id
 
+  default_scope order("created_at DESC")
+
   def is_owner?(user)
     user_id == user.id
   end

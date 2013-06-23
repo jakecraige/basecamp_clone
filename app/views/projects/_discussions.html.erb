@@ -8,8 +8,8 @@
     <% @discussions.each do |discussion| %>
       <tr>
         <td><%= link_to discussion.title, project_discussion_path(discussion.project_id, discussion) %></td>
-        <td><%= get_name(discussion.user_id) %></td>
-        <td>Created <%= time_ago_in_words(discussion.created_at) %> ago</td>
+        <td>Created <%= time_ago_in_words(discussion.created_at) %> ago 
+              by <%= link_name(discussion.user_id) %></td>
       </tr>
     <% end %>
     </table>
