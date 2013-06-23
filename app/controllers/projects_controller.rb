@@ -49,9 +49,27 @@ class ProjectsController < ApplicationController
   end
   
   def toggle_status
-    @project = Project.find(params[:id])
-    @project.toggle!(:status)
-    redirect_to @project
+    project = Project.find(params[:project_id])
+    project.toggle!(:status)
+    redirect_to project
+  end
+
+  def add_member
+    project = Project.find(params[:project_id])
+    user = User.find(params[:id])
+
+    project.members << user
+    redirect_to project
+  end
+
+  def remove_member
+    @member = Membership.where(project_id: params[:project_id],
+                              user_id: params[:id]).first
+    if @member
+      @member.destroy
+    end
+    redirect_to project_path(params[:project_id])
+    
   end
 
   private

@@ -1,7 +1,7 @@
 <% if @project.is_owner?(current_user) %>
   <%= link_to 'Edit', edit_project_path(@project),
         class: "btn btn-info", id: "edit-btn" %>
-  <%= simple_form_for(@project, url: { action: 'toggle_status' }) do |f| %>
+  <%= simple_form_for(@project, url: project_toggle_status_path(@project.id) ) do |f| %>
     <% if @project.active? %>
       <%= f.submit "Archive this project", class: "btn btn-primary"%>
     <% else %>
@@ -28,7 +28,10 @@
 <h3>Members</h3>
 <% if @project.members.any? %>
   <% @project.members.each do |member| %>
-    <%= link_name(member.id) %>
+    <%= link_name(member.id, class: "member") %>
+    <%= simple_form_for(@project, url: project_remove_member_path(@project.id, member.id) ) do |f| %>
+      <%= f.submit "Remove", class: "btn btn-small btn-danger" %>
+    <% end %>
   <% end %>
 <% else %>
   <p>No members just yet...</p>
@@ -36,7 +39,7 @@
 
 <% if @project.is_owner?(current_user) %>
   <div class="destroy">
-    <%= link_to 'Destroy', @project, 
+    <%= link_to 'Destroy Project', @project, 
       method: :delete, data: { confirm: 'Are you sure?' },
       class: "btn btn-danger" %>
   </div>

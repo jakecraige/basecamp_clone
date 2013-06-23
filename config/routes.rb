@@ -1,6 +1,9 @@
 BasecampClone::Application.routes.draw do
   resources :projects do
     resources :discussions
+    match '/member/remove/:id' => 'projects#remove_member', as: :remove_member
+    match '/member/add/:id' => 'projects#add_member', as: :add_member
+    match '/status' => 'projects#toggle_status', as: :toggle_status
   end
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -13,7 +16,7 @@ BasecampClone::Application.routes.draw do
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'
   match '/signout' => 'sessions#destroy'
-  match 'projects/:id/status' => 'projects#toggle_status'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
