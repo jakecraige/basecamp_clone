@@ -1,0 +1,11 @@
+<h3>Owner</h2>
+<p><%= get_name(@project.user_id) %></p>
+
+<h3>Members</h3>
+<% if @project.members.any? %>
+  <% @project.members.each do |member| %>
+    <%= get_name(member.id) %>
+  <% end %>
+<% else %>
+  <p>No members just yet...</p>
+<% end %>

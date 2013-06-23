@@ -1,60 +1,27 @@
-<h1>Project</h1>
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span8">
+  <h1><%= @project.title %></h1>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @project.title %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @project.description %>
-</p>
-<p>
-  <b>Status:</b>
-  <%= @project.status %>
-</p>
-<p>
-  <b>Due:</b>
-  <%= @project.due %>
-</p>
-<p>
-  <b>Creator:</b>
-  <%= User.find(@project.user_id).name %>
-</p>
+  <p>
+    <b>Description:</b>
+    <%= @project.description %>
+  </p>
+  <p>
+    <b>Status:</b>
+    <%= get_status(@project.status) %>
+  </p>
+  <p>
+    <b>Due:</b>
+    <%= @project.due %>
+  </p>
 
+  <%= link_to 'Edit', edit_project_path(@project) %> |
+  <%= link_to 'Back', projects_path %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
-
-<h1>Discussions</h1>
-<p>
-  <%= link_to "Create New Discussion", new_project_discussion_path(@project) %>
-</p>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Message</th>
-    <th>Creator</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @discussions.each do |discussion| %>
-  <tr>
-    <td><%= discussion.title %></td>
-    <td><%= discussion.message %></td>
-    <td><%= User.find(discussion.user_id).name %></td>
-    <td><%= link_to 'Show', 
-              project_discussion_path(discussion.project_id, discussion) %></td>
-    <% if discussion.is_owner?(current_user) %>
-      <td><%= link_to 'Edit', 
-                edit_project_discussion_path(discussion.project_id, discussion) %></td>
-      <td><%= link_to 'Destroy', 
-                project_discussion_path(discussion.project_id, discussion), 
-                method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-
+  <%= render 'discussions' %>
+  </div>
+  <div class="span3 well">
+  <%= render 'sidebar' %>
+  </div>
+</div> <!-- end row -->

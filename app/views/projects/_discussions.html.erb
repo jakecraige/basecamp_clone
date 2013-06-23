@@ -1,0 +1,38 @@
+<h1>Discussions</h1>
+<p>
+<%= link_to "New Discussion",
+  new_project_discussion_path(@project),
+  class: "btn btn-success" %>
+</p>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Creator</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @discussions.each do |discussion| %>
+  <tr>
+    <td><%= discussion.title %></td>
+    <td><%= User.find(discussion.user_id).name %></td>
+    <td><%= link_to 'Show', 
+      project_discussion_path(discussion.project_id, discussion),
+      class: "btn btn-primary" %>
+    </td>
+    <% if discussion.is_owner?(current_user) %>
+      <td><%= link_to 'Edit', 
+        edit_project_discussion_path(discussion.project_id, discussion),
+        class: "btn btn-info" %>
+      </td>
+      <td><%= link_to 'Destroy', 
+        project_discussion_path(discussion.project_id, discussion),
+        class: "btn btn-danger",
+          method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+

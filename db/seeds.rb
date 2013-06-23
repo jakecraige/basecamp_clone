@@ -36,12 +36,14 @@ project2 = user.projects.create(title: "ConnectOne Security",
                      description: "Make a website that has blah blah on it",
                      due: "2013-09-18")
 
-project3 = user2.projects.create(title: "CSW Creations Website",
+# I don't know why it's making me make it this way.
+project3 = Project.create(title: "CSW Creations Website",
                                 description: "This is my description",
-                                due: "2013-07-29")
+                                due: "2013-07-29",
+                                user_id: 2)
 
 # Make first user a member of user2's project
-project1.members << user
+project1.members << user2
 
 # Make Discussions
 project1.discussions.create!(title: "Design Stages...",
@@ -51,5 +53,15 @@ project1.discussions.create!(title: "Started Dev Stages Today",
                            message: "Starting Development Today...",
                            user_id: 2)
 
+project2.discussions.create!(title: "Pre-Planning Stages...",
+                           message: "Starting planning Today...",
+                           user_id: 3)
+project2.discussions.create!(title: "Starting Dev Stages Today",
+                           message: "Starting Development Today...",
+                           user_id: 2)
+
+project3.discussions.create!(title: "Sending Proposal",
+                           message: "Starting Development Today...",
+                           user_id: 4)
 
 
