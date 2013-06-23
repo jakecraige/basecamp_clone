@@ -13,6 +13,7 @@ BasecampClone::Application.routes.draw do
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'
   match '/signout' => 'sessions#destroy'
+  match 'projects/:id/status' => 'projects#toggle_status'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

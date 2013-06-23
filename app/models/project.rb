@@ -12,4 +12,16 @@ class Project < ActiveRecord::Base
   validates_presence_of :user_id
 
   default_scope order("due DESC")
+
+  def is_owner?(user)
+    user_id == user.id
+  end
+
+  def archived?
+    !status
+  end
+
+  def active?
+    status
+  end
 end

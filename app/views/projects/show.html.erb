@@ -1,27 +1,25 @@
 <div class="row">
   <div class="span8">
-  <h1><%= @project.title %></h1>
-  <p id="notice"><%= notice %></p>
+    <h1><%= @project.title %></h1>
+    <p id="notice"><%= notice %></p>
 
-  <p>
-    <b>Description:</b>
-    <%= @project.description %>
-  </p>
-  <p>
-    <b>Status:</b>
-    <%= get_status(@project.status) %>
-  </p>
-  <p>
-    <b>Due:</b>
-    <%= @project.due %>
-  </p>
+    <p class="description">
+      <%= @project.description %>
+    </p>
 
-  <%= link_to 'Edit', edit_project_path(@project) %> |
-  <%= link_to 'Back', projects_path %>
-
-  <%= render 'discussions' %>
+    <%= render 'discussions' %>
+    <div class="block">
+      <h2>To-do Lists</h2>
+      <p>Placeholder</p>
+    </div>
+    <div class="block">
+      <h2>Text Documents</h2>
+      <p>Placeholder</p>
+    </div>
   </div>
-  <div class="span3 well">
-  <%= render 'sidebar' %>
+
+
+  <div class="span3 well sidebar">
+    <%= render 'sidebar' %>
   </div>
 </div> <!-- end row -->

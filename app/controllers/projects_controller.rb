@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @title = @project.title
     @discussions = Discussion.where(project_id: params[:id])
   end
 
@@ -44,6 +45,12 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     redirect_to projects_url
+  end
+  
+  def toggle_status
+    @project = Project.find(params[:id])
+    @project.toggle!(:status)
+    redirect_to @project
   end
 
   private

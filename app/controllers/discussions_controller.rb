@@ -11,13 +11,10 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new
   end
 
-  # GET /discussions/1/edit
   def edit
     @discussion = Discussion.find(params[:id])
   end
 
-  # POST /discussions
-  # POST /discussions.json
   def create
     cur_project = Project.find(params[:project_id])
     @discussion = cur_project.discussions.new(params[:discussion])
@@ -31,8 +28,6 @@ class DiscussionsController < ApplicationController
       end
   end
 
-  # PUT /discussions/1
-  # PUT /discussions/1.json
   def update
     @discussion = Discussion.find(params[:id])
 
@@ -43,8 +38,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # DELETE /discussions/1
-  # DELETE /discussions/1.json
   def destroy
     @discussion = Discussion.find(params[:id])
     @discussion.destroy
