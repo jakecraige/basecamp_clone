@@ -60,7 +60,7 @@ project2.discussions.create!(title: "Pre-Planning Stages...",
                            user_id: 3)
 project2.discussions.create!(title: "Starting Dev Stages Today",
                            message: "Starting Development Today...",
-                           user_id: 2)
+                           user_id: 6)
 
 project3.discussions.create!(title: "Sending Proposal",
                            message: "Starting Development Today...",

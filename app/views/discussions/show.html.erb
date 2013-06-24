@@ -1,24 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
+<h2>
   <%= @discussion.title %>
-</p>
+</h2>
 
+<div class="well message">
 <p>
-  <b>Message:</b>
   <%= @discussion.message %>
 </p>
-
-<p>
-  <b>Project:</b>
-  <%= @discussion.project_id %>
-</p>
-
 <p>
   <b>User:</b>
   <%= @discussion.user_id %>
 </p>
+</div>
+
+<%= render 'comment_form' %>
 
 
 <%= link_to 'Edit', edit_project_discussion_path(@discussion) %> |

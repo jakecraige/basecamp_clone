@@ -3,6 +3,8 @@ class Discussion < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
+  has_many :comments
+
   validates_presence_of :title
   validates_presence_of :message
   validates_presence_of :project_id

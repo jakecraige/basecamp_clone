@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :projects
   has_many :discussions
+  has_many :comments
 
   has_many :memberships
   has_many :member_of_project, through: :memberships, source: :project
