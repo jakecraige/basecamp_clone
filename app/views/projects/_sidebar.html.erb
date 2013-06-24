@@ -38,13 +38,15 @@
     <% @project.members.each do |member| %>
       <tr>
         <td><%= link_name(member.id, class: "member") %></td>
-        <td><%= simple_form_for(@project, 
-                  url: project_remove_member_path(@project.id, member.id),
-                  html: { class: "form-inline" } ) do |f| %>
-              <%= f.submit "Remove", class: "btn btn-small" %>
-              <%#class: "btn btn-small btn-danger"%>
-            <% end %>
-        </td>
+        <% if @project.is_owner?(current_user) %>
+          <td><%= simple_form_for(@project, 
+                    url: project_remove_member_path(@project.id, member.id),
+                    html: { class: "form-inline" } ) do |f| %>
+                <%= f.submit "Remove", class: "btn btn-small" %>
+                <%#class: "btn btn-small btn-danger"%>
+              <% end %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
     </table>
