@@ -80,8 +80,8 @@ class ProjectsController < ApplicationController
     end
     if errors.any?
       flash[:error] = errors.join("<br>")
+      redirect_to project_members_path(params[:project_id])
     end
-    redirect_to project_members_path(params[:project_id])
   end
 
   def remove_member
