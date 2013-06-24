@@ -1,8 +1,10 @@
 BasecampClone::Application.routes.draw do
   resources :projects do
     resources :discussions
-    match '/member/remove/:id' => 'projects#remove_member', as: :remove_member
-    match '/member/add/:id' => 'projects#add_member', as: :add_member
+    match '/members' => 'projects#members_page', via: :get, as: :members
+    match '/members' => 'projects#add_member', via: :post, as: :members
+    match '/members/remove/:id' => 'projects#remove_member', as: :remove_member
+    #match '/members/add/:id' => 'projects#add_member', as: :add_member
     match '/status' => 'projects#toggle_status', as: :toggle_status
   end
 

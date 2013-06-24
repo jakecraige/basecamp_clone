@@ -41,11 +41,25 @@
     float: left;
     margin-right: 10px;
   }
-  .member {
-    clear: both;
-    float: left;
-    margin-right: 10px;
-    margin-top: 4px;
+  #members_heading {
+    h3 {
+      float: left;
+    }
+    a {
+      margin-top: 16px;
+      margin-left: 11px;
+    }
   }
-
+  #members_list {
+    clear: both;
+    table {
+      width: 100%;
+    }
+    #edit_project_1 {
+      margin: 5px 0;
+    }
+  }
+  .destroy {
+    margin-top: 40px;
+  }
 }

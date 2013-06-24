@@ -25,18 +25,33 @@
 <h3>Owner</h2>
 <p><%= link_name(@project.user_id) %></p>
 
-<h3>Members</h3>
-<% if @project.members.any? %>
-  <% @project.members.each do |member| %>
-    <%= link_name(member.id, class: "member") %>
-    <%= simple_form_for(@project, url: project_remove_member_path(@project.id, member.id) ) do |f| %>
-      <%= f.submit "Remove", class: "btn btn-small btn-danger" %>
-    <% end %>
+<div id="members_heading">
+  <h3>Members</h3>
+  <% if @project.is_owner?(current_user) %>
+    <%= link_to "Add", project_members_path(@project), class: "btn btn-success" %>
   <% end %>
-<% else %>
-  <p>No members just yet...</p>
-<% end %>
+</div>
 
+<div id="members_list">
+  <% if @project.members.any? %>
+    <table>
+    <% @project.members.each do |member| %>
+      <tr>
+        <td><%= link_name(member.id, class: "member") %></td>
+        <td><%= simple_form_for(@project, 
+                  url: project_remove_member_path(@project.id, member.id),
+                  html: { class: "form-inline" } ) do |f| %>
+              <%= f.submit "Remove", class: "btn btn-small" %>
+              <%#class: "btn btn-small btn-danger"%>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  <% else %>
+    <p>No members just yet...</p>
+  <% end %>
+</div>
 <% if @project.is_owner?(current_user) %>
   <div class="destroy">
     <%= link_to 'Destroy Project', @project, 

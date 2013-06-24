@@ -7,6 +7,7 @@ gem 'bootstrap-sass'
 gem 'gravatar_image_tag'
 gem 'simple_form'
 gem 'will_paginate'
+gem 'jquery-ui-rails'
 
 group :development do
   gem 'faker'

@@ -54,19 +54,32 @@ class ProjectsController < ApplicationController
     redirect_to project
   end
 
-  def add_member
-    project = Project.find(params[:project_id])
-    user = User.find(params[:id])
+  def members_page
+    @project = Project.find(params[:project_id])
+  end
 
-    project.members << user
-    redirect_to project
+  def add_member
+    #raise params.inspect
+    project = Project.find(params[:project_id])
+    user = User.find_by_email(params[:user_email])
+    
+    if user || !user.nil?
+      project.members << user
+      redirect_to project, flash: { success: "Member Added." }
+    else
+      flash[:error] = "Could not find user's email"
+      redirect_to project_members_path(params[:project_id])
+    end
   end
 
   def remove_member
     @member = Membership.where(project_id: params[:project_id],
                               user_id: params[:id]).first
     if @member
+      flash[:success] = "Member removed."
       @member.destroy
+    else
+      flash[:error] = "Error removing member."
     end
     redirect_to project_path(params[:project_id])
     
