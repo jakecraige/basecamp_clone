@@ -63,14 +63,25 @@ class ProjectsController < ApplicationController
     #raise params.inspect
     project = Project.find(params[:project_id])
     user = User.find_by_email(params[:user_email])
-    
-    if user || !user.nil?
-      project.members << user
-      redirect_to project, flash: { success: "Member Added." }
+    errors = []
+    if user && !user.nil?
+      if params[:user_email] != project.user.email 
+        if !project.members.include?(user)
+          project.members << user
+          redirect_to project, flash: { success: "Member Added." }
+        else
+          errors << ["Entered email is already a member."]
+        end
+      else
+        errors << ["Entered email is owner of project."]
+      end
     else
-      flash[:error] = "Could not find user's email"
-      redirect_to project_members_path(params[:project_id])
+      errors = ["Could not find entered email."]
     end
+    if errors.any?
+      flash[:error] = errors.join("<br>")
+    end
+    redirect_to project_members_path(params[:project_id])
   end
 
   def remove_member
