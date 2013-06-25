@@ -12,3 +12,8 @@
  *= require_self
  *= require_tree .
  */
+
+.full-table {
+  width: 100%;
+}
+

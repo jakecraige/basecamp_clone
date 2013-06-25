@@ -3,7 +3,7 @@
 
     <h2>All Projects</h2>
     <% if @projects.any? %>
-      <table>
+      <table class="full-table">
       <% @projects.each do |project| %>
         <tr>
           <td><%= link_to project.title, project  %></td>
@@ -18,7 +18,7 @@
 
     <h2>Recent Comments</h2>
     <% if @recent_comments.any? %>
-      <table>
+      <table class="full-table">
       <% @recent_comments.each do |comment| %>
         <tr>
           <% @discussion = Discussion.find(comment.discussion_id) %>
