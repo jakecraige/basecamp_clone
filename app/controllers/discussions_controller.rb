@@ -35,7 +35,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
 
     if @discussion.update_attributes(params[:discussion])
-      redirect_to project_discussion_path(@discussion), notice: 'Discussion was successfully updated.'
+      redirect_to project_discussion_path(@discussion.project_id, @discussion), notice: 'Discussion was successfully updated.'
     else
       render action: "edit"
     end

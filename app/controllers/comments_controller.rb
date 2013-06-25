@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @discussion = Discussion.find(@comment.discussion_id)
   end
 
   def create
@@ -41,15 +42,12 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
+    @discussion = Discussion.find(@comment.discussion_id)
 
-    respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.update_attributes(params[:comment])
+        redirect_to project_discussion_path(@discussion.project_id, @discussion), notice: 'Comment was successfully created.'
+    else
+      render action: "edit"
     end
   end
 

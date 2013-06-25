@@ -10,7 +10,7 @@
     <%= link_name(@discussion.user_id) %> | 
     Posted <%= time_ago_in_words(@discussion.created_at) %> ago
     <% if @discussion.is_owner?(current_user) %>
-      | <%= link_to 'Edit', edit_project_discussion_path(@discussion) %>
+      | <%= link_to 'Edit', edit_project_discussion_path(@discussion.project_id, @discussion) %>
     <% end %>
   </p>
 </div>
