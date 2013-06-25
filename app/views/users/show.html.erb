@@ -2,9 +2,43 @@
   <div class="span8">
     <%= gravatar_for @user %>
     <h1><%= @user.name %></h1>
-  </div>
+
+    <h2>All Projects</h2>
+    <% if @projects.any? %>
+      <table>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.title, project  %></td>
+          <td>Due in <%= distance_of_time_in_words(Time.now, project.due) %></td>
+          <td>Project manager: <%= link_name(project.user_id) %></td>
+        </tr>
+      <% end %>
+      </table>
+    <% else %>
+      <p><%= @user.name %> does not have any projects at this moment...</p>
+    <% end %>
+
+    <h2>Recent Comments</h2>
+    <% if @recent_comments.any? %>
+      <table>
+      <% @recent_comments.each do |comment| %>
+        <tr>
+          <% @discussion = Discussion.find(comment.discussion_id) %>
+          <td><%= link_to comment.body.truncate(50),
+                    project_discussion_path(@discussion.project_id, @discussion) %></td>
+          <td>Posted <%= time_ago_in_words(comment.created_at) %> ago</td>
+        </tr>
+      <% end %>
+      </table>
+    <% else %>
+      <p><%= @user.name %> does not have any projects at this moment...</p>
+    <% end %>
+    
+  </div> <!-- end span8 -->
+
+  <!-- Sidebar -->
   <div class="span3 well">
     <strong>Name: </strong><%= @user.name %><br>
-    <strong>URL: </strong><%= link_to user_path(@user), @user %>
+    <strong>Joined: </strong><%= @user.created_at.strftime("%b %d, %Y")  %><br>
   </div>
 </div>

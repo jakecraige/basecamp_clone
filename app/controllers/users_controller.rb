@@ -16,6 +16,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = @user.name
+
+    user_projects = @user.projects
+    member_of = @user.member_of_project
+
+    @projects = user_projects + member_of
+    @recent_comments = Comment.where(user_id: @user.id).limit(5)
   end
 
   def create
