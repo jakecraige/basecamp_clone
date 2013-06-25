@@ -5,9 +5,11 @@ class ProjectsController < ApplicationController
   def index
     user_projects = current_user.projects
     member_of = current_user.member_of_project
-    copy_array = user_projects + member_of
+
+    @active_projects = user_projects.where(status: true) + member_of.where(status: true)
+    @archived_projects = user_projects.where(status: false) + member_of.where(status: false)
+
     @title = "My Projects"
-    @projects = copy_array
   end
 
   def show
