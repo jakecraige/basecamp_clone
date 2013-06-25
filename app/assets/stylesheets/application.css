@@ -13,7 +13,10 @@
  *= require_tree .
  */
 
-.full-table {
+table.full-table {
   width: 100%;
+}
+table.full-table td {
+  padding: 5px 0;
 }
 
