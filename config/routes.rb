@@ -1,9 +1,8 @@
 BasecampClone::Application.routes.draw do
 
+  resources :comments
   resources :projects do
-    resources :discussions do
-      resources :comments
-    end
+    resources :discussions
     match '/members' => 'projects#members_page', via: :get, as: :members
     match '/members' => 'projects#add_member', via: :post, as: :members
     match '/members/remove/:id' => 'projects#remove_member', as: :remove_member

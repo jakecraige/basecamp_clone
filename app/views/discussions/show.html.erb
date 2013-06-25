@@ -5,17 +5,28 @@
 </h2>
 
 <div class="well message">
-<p>
-  <%= @discussion.message %>
-</p>
-<p>
-  <b>User:</b>
-  <%= @discussion.user_id %>
-</p>
+  <p class="body"><%= @discussion.message %></p>
+  <p class="created">
+    <%= link_name(@discussion.user_id) %> | 
+    Posted <%= time_ago_in_words(@discussion.created_at) %> ago
+    <% if @discussion.is_owner?(current_user) %>
+      | <%= link_to 'Edit', edit_project_discussion_path(@discussion) %>
+    <% end %>
+  </p>
 </div>
 
-<%= render 'comment_form' %>
+<%= render 'comments/form' %>
+<% @comments.each do |comment| %>
+  <div class="well message">
+    <p class="body"><%= comment.body %></p>
+    <p class="created">
+      <%= link_name(comment.user_id) %> | 
+      Posted <%= time_ago_in_words(comment.created_at) %> ago
+    <% if comment.is_owner?(current_user) %>
+      | <%= link_to 'Edit', edit_comment_path(comment) %>
+    <% end %>
+    </p>
+  </div>
+<% end %>
 
-
-<%= link_to 'Edit', edit_project_discussion_path(@discussion) %> |
 <%= link_to 'Back', project_discussions_path %>

@@ -5,8 +5,9 @@ class DiscussionsController < ApplicationController
 
   def show
     @discussion = Discussion.find(params[:id])
+    @project = Project.find(params[:project_id])
     @comment = Comment.new
-    @comments = Comment.find_by_discussion_id(params[:id])
+    @comments = Comment.where(discussion_id: params[:id])
   end
 
   def new
