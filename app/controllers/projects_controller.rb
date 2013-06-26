@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @title = @project.title
     @discussions = Discussion.where(project_id: params[:id])
+    @text_documents = TextDocument.where(project_id: params[:id])
   end
 
   def new
