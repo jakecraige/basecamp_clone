@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :discussions
   has_many :comments
   has_many :text_documents
+  has_many :tasks
 
   has_many :memberships
   has_many :member_of_project, through: :memberships, source: :project
