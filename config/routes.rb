@@ -1,9 +1,8 @@
 BasecampClone::Application.routes.draw do
 
-  resources :tasks
-
-
-  resources :lists
+  resources :lists do
+    resources :tasks
+  end
 
 
   resources :comments

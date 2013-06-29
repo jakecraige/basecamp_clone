@@ -14,9 +14,11 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    session[:project_id] = @project.id
     @title = @project.title
-    @discussions = Discussion.where(project_id: params[:id])
-    @text_documents = TextDocument.where(project_id: params[:id])
+    @discussions = Discussion.where(project_id: @project)
+    @lists = List.where(project_id: @project)
+    @text_documents = TextDocument.where(project_id: @project)
   end
 
   def new
