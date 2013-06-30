@@ -13,13 +13,12 @@ class TasksController < ApplicationController
   def edit
     @list = List.find(params[:list_id])
     @task = Task.find(params[:id])
-    redirect_to @list
   end
 
   def update
     @task = Task.find(params[:id])
     if @task.update_attributes(params[:task])
-      redirect_to lists_path(@task.list_id)
+      redirect_to list_path(@task.list_id)
     else
       render action: 'edit'
     end
@@ -30,5 +29,10 @@ class TasksController < ApplicationController
     @task.destroy
 
     redirect_to root_path
+  end
+
+  def complete
+     Task.update_all(["complete=?", 1], id: params[:task_ids])
+     redirect_to List.find(params[:list_id])
   end
 end

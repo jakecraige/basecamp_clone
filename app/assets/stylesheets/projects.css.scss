@@ -48,6 +48,22 @@
   }
 }
 
+.lists {
+  h2 {
+    float: left;
+  }
+  .btn {
+    margin-top: 17px;
+    margin-left: 26px;
+  }
+  p:before {
+     content: "."; 
+     visibility: hidden; 
+     display: block; 
+     height: 0; 
+     clear: both;
+  }
+}
 .sidebar {
   #edit-btn {
     float: left;
