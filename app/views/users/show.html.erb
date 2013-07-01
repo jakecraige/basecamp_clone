@@ -1,36 +1,10 @@
 <div class="row">
   <div class="span8">
 
-    <h2>All Projects</h2>
-    <% if @projects.any? %>
-      <table class="full-table">
-      <% @projects.each do |project| %>
-        <tr>
-          <td><%= link_to project.title, project  %></td>
-          <td>Due in <%= distance_of_time_in_words(Time.now, project.due) %></td>
-          <td>Project manager: <%= link_name(project.user_id) %></td>
-        </tr>
-      <% end %>
-      </table>
-    <% else %>
-      <p><%= @user.name %> does not have any projects at this moment...</p>
-    <% end %>
+    <%= render 'projects' %>
+    <%= render 'discussions' %>
+    <%= render 'comments' %>
 
-    <h2>Recent Comments</h2>
-    <% if @recent_comments.any? %>
-      <table class="full-table">
-      <% @recent_comments.each do |comment| %>
-        <tr>
-          <% @discussion = Discussion.find(comment.discussion_id) %>
-          <td><%= link_to comment.body.truncate(50),
-                    project_discussion_path(@discussion.project_id, @discussion) %></td>
-          <td>Posted <%= time_ago_in_words(comment.created_at) %> ago</td>
-        </tr>
-      <% end %>
-      </table>
-    <% else %>
-      <p><%= @user.name %> does not have any projects at this moment...</p>
-    <% end %>
     
   </div> <!-- end span8 -->
 

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
     @projects = user_projects + member_of
     @recent_comments = Comment.where(user_id: @user.id).limit(5)
+    @recent_discussions = Discussion.where(user_id: @user.id).limit(5)
   end
 
   def create

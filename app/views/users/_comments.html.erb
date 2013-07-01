@@ -1,0 +1,17 @@
+<h2>Recent Comments</h2>
+<% if @recent_comments.any? %>
+  <table class="full-table">
+  <% @recent_comments.each do |comment| %>
+    <tr>
+      <% @discussion = Discussion.find(comment.discussion_id) %>
+      <td><%= comment.body.truncate(30) %></td>
+      <td>On: <%= link_to @discussion.title.truncate(30),
+                project_discussion_path(@discussion.project_id, @discussion) %></td>
+      <td>Posted <%= time_ago_in_words(comment.created_at) %> ago</td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p><%= @user.name %> does not have any comments at this moment...</p>
+<% end %>
+

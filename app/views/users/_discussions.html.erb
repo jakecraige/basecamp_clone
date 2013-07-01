@@ -1,0 +1,15 @@
+<h2>Recent Discussions</h2>
+<% if @recent_discussions.any? %>
+  <table class="full-table">
+  <% @recent_discussions.each do |discussion| %>
+    <tr>
+      <td><%= link_to discussion.title.truncate(50),
+                project_discussion_path(discussion.project_id, discussion) %></td>
+      <td>Posted <%= time_ago_in_words(discussion.created_at) %> ago</td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p><%= @user.name %> does not have any discussions at this moment...</p>
+<% end %>
+
