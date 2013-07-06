@@ -6,6 +6,9 @@
     <p class="description">
       <%= @project.description %>
     </p>
+    <% @info.each do |i| %>
+      <p><%= i %></p>
+    <% end %>
 
     <%= render 'discussions' %>
 

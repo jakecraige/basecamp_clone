@@ -19,6 +19,15 @@ class ProjectsController < ApplicationController
     @discussions = Discussion.where(project_id: @project)
     @lists = List.where(project_id: @project)
     @text_documents = TextDocument.where(project_id: @project)
+    arr = [@discussions, @text_documents]
+    @info = ActivityFeed::feed(arr)
+    #@discussions.each do |discussion|
+      #@info << ActivityFeed::format(discussion)
+    #end
+    #@text_documents.each do |document|
+      #@info << ActivityFeed::format(document)
+    #end
+
   end
 
   def new
