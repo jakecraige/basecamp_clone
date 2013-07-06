@@ -14,16 +14,18 @@ class ActivityFeed < ActiveRecord::Base
     objects.each do |object|
       id = object.id
       type = object.class.to_s
-      creator = object.user.name
       time = object.updated_at
       action = 'added'
+      creator = ''
       
+      if object.class != User && object.class != List
+        creator = object.user.name
+      end
+
       if object.updated_at > object.created_at
         action = 'updated'
       end
-      if object.class == User
-        action = 'added'
-      end
+
       info << {id: id, type: type, creator: creator,
                time: time, action: action}
     end

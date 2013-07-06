@@ -16,16 +16,18 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     session[:project_id] = @project.id
     @title = @project.title
+    @members = @project.members
     @discussions = Discussion.where(project_id: @project)
     @lists = List.where(project_id: @project)
     @text_documents = TextDocument.where(project_id: @project)
-    arr = [@discussions, @text_documents]
-    @info = ActivityFeed::feed(arr)
+
+    arr = [@discussions, @text_documents, @lists, @members]
+    @feeds = ActivityFeed::feed(arr)
     #@discussions.each do |discussion|
       #@info << ActivityFeed::format(discussion)
     #end
     #@text_documents.each do |document|
-      #@info << ActivityFeed::format(document)
+      #@info << ndowActivityFeed::format(document)
     #end
 
   end
