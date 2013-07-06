@@ -21,8 +21,13 @@ class UsersController < ApplicationController
     member_of = @user.member_of_project
 
     @projects = user_projects + member_of
-    @recent_comments = Comment.where(user_id: @user.id).limit(5)
-    @recent_discussions = Discussion.where(user_id: @user.id).limit(5)
+    @comments = Comment.where(user_id: @user.id)
+    @discussions = Discussion.where(user_id: @user.id)
+    @recent_comments = @comments.limit(5)
+    @recent_discussions = @discussions.limit(5)
+
+    arr = [@recent_comments, @recent_discussions]
+    @feeds = ActivityFeed::feed(arr, {caller: 'User'})
   end
 
   def create

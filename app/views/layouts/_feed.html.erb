@@ -1,0 +1,42 @@
+<% @feeds.each do |feed| %>
+  <p>
+    <% case feed[:type] %>
+      <% when "Discussion" %>
+        <% discussion = Discussion.find(feed[:id]) %>
+        <% project = discussion.project %>
+        <% has_creator = TRUE %>
+        <%= feed[:type] %>
+        <%= link_to discussion.title, [project, discussion] %>
+      <% when "User" %>
+        <% user = User.find(feed[:id]) %>
+        <%= link_to user.name, user %>
+      <% when "List" %>
+        <% list = List.find(feed[:id]) %>
+        <%= feed[:type] %>
+        <%= link_to list.title, list %>
+      <% when "Comment" %>
+        <% comment = Comment.find(feed[:id]) %>
+        <% has_creator = TRUE %>
+        <% discussion = comment.discussion %>
+        <% project = discussion.project %>
+        <%= feed[:type] %>
+      <% when "TextDocument" %>
+        <% text_document = TextDocument.find(feed[:id]) %>
+        <% has_creator = TRUE %>
+        <% project = text_document.project %>
+        <%= feed[:type].underscore.humanize %>
+        <%= link_to text_document.title, [project, text_document] %>
+    <% end %>
+    <%= feed[:action] %>
+    <% if feed[:type] == 'Comment' %>
+      to <%= link_to discussion.title, [project, discussion] %>
+    <% end %>
+    <% if feed[:type] == 'User' %>
+      to project 
+    <% end %>
+    <% if has_creator && !feed[:creator].blank? %>
+      by <%= link_to feed[:creator], User.find_by_name(feed[:creator]) %>
+    <% end %>
+    - <%= time_ago_in_words(feed[:time]) %> ago
+  </p>
+<% end %>

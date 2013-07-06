@@ -6,29 +6,8 @@
     <p class="description">
       <%= @project.description %>
     </p>
-    <% @feeds.each do |feed| %>
-      <p>
-        <% if feed[:type] == 'Discussion' %>
-          <% discussion = Discussion.find(feed[:id]) %>
-          <% project = discussion.project %>
-          <%= link_to feed[:type], [project, discussion] %>
 
-        <% elsif feed[:type] == 'User' %>
-          <% user = User.find(feed[:id]) %>
-          <%= link_to feed[:type], user %>
-
-        <% elsif feed[:type] == 'List' %>
-          <% list = List.find(feed[:id]) %>
-          <%= link_to feed[:type], list %>
-
-        <% elsif feed[:type] == 'TextDocument'%>
-          <% text_document = TextDocument.find(feed[:id]) %>
-          <% project = text_document.project %>
-          <%= link_to feed[:type], [project, text_document] %>
-
-        <% end %>
-      </p>
-    <% end %>
+    <%= render 'layouts/feed' %>
 
     <%= render 'discussions' %>
 
