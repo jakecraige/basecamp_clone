@@ -17,7 +17,11 @@
       <% when "Task" %>
         <% task = Task.find(feed[:id]) %>
         <% list = task.list %>
-        <%= feed[:type] + ' - ' + task.body %>
+        <% if feed[:action] == 'updated' %>
+          <%= feed[:type] %>
+        <% else %>
+          <%= feed[:type] + ' - ' + task.body %>
+        <% end %>
       <% when "Comment" %>
         <% comment = Comment.find(feed[:id]) %>
         <% has_creator = TRUE %>
@@ -42,6 +46,9 @@
           in
         <% else %>
           to
+          <% if feed[:action] == 'updated' %>
+            <%= task.body %> in
+          <% end %>
         <% end %>
         <%= link_to list.title, list %>
       <% when 'User' %>
