@@ -1,4 +1,5 @@
 class ActivityFeed < ActiveRecord::Base
+
   def self.feed(objects, hash = {})
     info = []
     objects.each do |obj_array|
@@ -7,9 +8,11 @@ class ActivityFeed < ActiveRecord::Base
       end
     end
     info.sort_by {|k| k[:time] }.reverse.take(5)
+
   end
 
   private
+
     def self.format(objects, hash = {})
       info = []
       objects.each do |object|
@@ -17,11 +20,13 @@ class ActivityFeed < ActiveRecord::Base
       end
       info
     end
+    
     def self.action(object)
       return 'completed' if object.class == Task && object.complete?
       return 'updated' if object.updated_at > object.created_at
       'added'
     end
+
     def self.obj_info(object, info, hash = {})
 
         id = object.id
