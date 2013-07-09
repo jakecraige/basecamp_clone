@@ -5,7 +5,14 @@
 </h2>
 
 <div class="well message">
-  <p class="body"><%= @discussion.message %></p>
+  <p class="body"><%= @discussion.message %>
+  <% if @discussion.file? %>
+    <p class="file">
+      <i>File: </i>
+      <%= link_to File.basename(@discussion.file.path), @discussion.file.url %>
+    </p>
+  <% end %>
+  </p>
   <p class="created">
     <%= link_name(@discussion.user_id) %> | 
     Posted <%= time_ago_in_words(@discussion.created_at) %> ago

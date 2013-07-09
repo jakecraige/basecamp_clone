@@ -1,5 +1,6 @@
 class TextDocument < ActiveRecord::Base
-  attr_accessible :body, :project_id, :user_id, :title
+  attr_accessible :body, :project_id, :user_id, :title, :file
+  mount_uploader :file, FileUploader
   belongs_to :user
   belongs_to :project
 

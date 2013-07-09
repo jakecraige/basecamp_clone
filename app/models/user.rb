@@ -1,5 +1,4 @@
-class User < Activeed for nagivating windows;q
-  ecord::Base
+class User < ActiveRecord::Base
   has_many :projects
   has_many :discussions
   has_many :comments

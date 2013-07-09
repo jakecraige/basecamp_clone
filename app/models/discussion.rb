@@ -1,5 +1,6 @@
 class Discussion < ActiveRecord::Base
-  attr_accessible :message, :project_id, :title, :user_id
+  attr_accessible :message, :project_id, :title, :user_id, :file
+  mount_uploader :file, FileUploader
   belongs_to :project
   belongs_to :user
 

@@ -26,4 +26,19 @@ class Project < ActiveRecord::Base
   def active?
     status
   end
+
+  def files
+    files = []
+    self.discussions.each do |discussion|
+      if discussion.file?
+        files << discussion.file
+      end
+    end
+    self.text_documents.each do |discussion|
+      if discussion.file?
+        files << discussion.file
+      end
+    end
+    files
+  end
 end

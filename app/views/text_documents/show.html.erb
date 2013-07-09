@@ -8,6 +8,12 @@
 </p>
 <hr>
 <p class="body"><%= @text_document.body %></p>
+<% if @text_document.file? %>
+  <p class="file">
+    <i>File: </i>
+    <%= link_to File.basename(@text_document.file.path), @text_document.file.path %>
+  </p>
+<% end %>
 
 <div class="back">
   <p><%= link_to "Back to project", project_path(params[:project_id]) %></p>

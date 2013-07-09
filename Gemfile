@@ -8,6 +8,7 @@ gem 'gravatar_image_tag'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
+gem "carrierwave"
 
 group :development do
   gem 'faker'
