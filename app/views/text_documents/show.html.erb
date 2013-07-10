@@ -2,8 +2,8 @@
 <p class="info">
   By <%= link_name @text_document.user %>
   on <%= @text_document.created_at.strftime("%a, %b %l, %Y %l:%M %p") %>
-  <% if @text_document.is_owner?(current_user) %>
-    | <%= link_to "Edit", edit_project_text_document_path(@text_document.project_id, @text_document) %>
+  <% if current_user.owns?(@text_document) %>
+    | <%= link_to "Edit", edit_project_text_document_path(@text_document.project, @text_document) %>
   <% end %>
 </p>
 <hr>

@@ -1,4 +1,4 @@
-<% if @project.is_owner?(current_user) %>
+<% if current_user.owns?(@project) %>
   <%= link_to 'Edit', edit_project_path(@project),
         class: "btn btn-info", id: "edit-btn" %>
   <%= simple_form_for(@project, url: project_toggle_status_path(@project.id) ) do |f| %>
@@ -27,7 +27,7 @@
 
 <div id="members_heading">
   <h3>Members</h3>
-  <% if @project.is_owner?(current_user) %>
+  <% if current_user.owns?(@project) %>
     <%= link_to "Add", project_members_path(@project), class: "btn btn-success" %>
   <% else %>
     <%if @project.members.include?(current_user) %>
@@ -43,7 +43,7 @@
     <% @project.members.each do |member| %>
       <tr>
         <td><%= link_name(member, class: "member") %></td>
-        <% if @project.is_owner?(current_user) %>
+        <% if current_user.owns?(@project) %>
           <td><%= simple_form_for(@project, 
                     url: project_remove_member_path(@project.id, member.id),
                     html: { class: "form-inline" } ) do |f| %>
@@ -59,7 +59,7 @@
     <p>No members just yet...</p>
   <% end %>
 </div>
-<% if @project.is_owner?(current_user) %>
+<% if current_user.owns?(@project) %>
   <div class="destroy">
     <%= link_to 'Destroy Project', @project, 
       method: :delete, data: { confirm: 'Are you sure?' },

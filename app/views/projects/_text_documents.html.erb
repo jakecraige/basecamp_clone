@@ -9,7 +9,7 @@
     <% @text_documents.each do |text_document| %>
       <tr>
         <td><%= link_to text_document.title,
-          project_text_document_path(text_document.project_id, text_document) %></td>
+          project_text_document_path(text_document.project, text_document) %></td>
         <td>
           by <%= link_name text_document.user %>
       </tr>

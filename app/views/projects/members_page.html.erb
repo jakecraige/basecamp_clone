@@ -4,7 +4,6 @@
                       url: { action: "add_member" },
                       method: :post,
                       html: { class: "form-inline" } do |f| %>
-  <%#<input type="text" name="user_email" placeholder="Email Address" id="user_email">%>
   <%= text_field_tag "user_email", nil, placeholder: "Email Address",
         data: {autocomplete_source: User.order(:email).map(&:email)} %>
   <%= f.submit "Add", class: "btn btn-success" %>

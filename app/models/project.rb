@@ -17,10 +17,6 @@ class Project < ActiveRecord::Base
   scope :active, where(status: true)
   scope :archived, where(status: false)
 
-  def is_owner?(user)
-    user_id == user.id
-  end
-
   def archived?
     !status
   end

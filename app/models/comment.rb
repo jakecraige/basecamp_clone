@@ -10,7 +10,4 @@ class Comment < ActiveRecord::Base
 
   default_scope order("created_at DESC")
 
-  def is_owner?(this_user)
-    user == this_user
-  end
 end

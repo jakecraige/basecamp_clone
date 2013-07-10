@@ -16,7 +16,7 @@
   <p class="created">
     <%= link_name(@discussion.user) %> | 
     Posted <%= time_ago_in_words(@discussion.created_at) %> ago
-    <% if @discussion.is_owner?(current_user) %>
+    <% if current_user.owns?(@discussion) %>
       | <%= link_to 'Edit', edit_project_discussion_path(@discussion.project_id, @discussion) %>
     <% end %>
   </p>
@@ -29,7 +29,7 @@
     <p class="created">
       <%= link_name(comment.user) %> | 
       Posted <%= time_ago_in_words(comment.created_at) %> ago
-    <% if comment.is_owner?(current_user) %>
+    <% if current_user.owns?(comment) %>
       | <%= link_to 'Edit', edit_comment_path(comment) %>
     <% end %>
     </p>

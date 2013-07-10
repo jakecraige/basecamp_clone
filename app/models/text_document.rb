@@ -11,7 +11,4 @@ class TextDocument < ActiveRecord::Base
 
   default_scope order("created_at DESC")
 
-  def is_owner?(user)
-    user_id == user.id
-  end
 end

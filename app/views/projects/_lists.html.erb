@@ -4,7 +4,7 @@
   <% if @lists.any? %>
     <% @lists.each do |list| %>
       <p><%= link_to list.title, list %> | 
-         <%= pluralize(list.tasks.where("complete IS NOT 1").count, 'task')%> incomplete</p>
+         <%= pluralize(list.tasks.not_completed.count, 'task')%> incomplete</p>
     <% end %>
   <% else %>
     <p>No lists created yet...</p>
