@@ -54,7 +54,7 @@ class TextDocumentsController < ApplicationController
 
   private
     def redirect_to_document
-      redirect_to project_text_document_path(@text_document.project_id,
+      redirect_to project_text_document_path(@text_document.project,
                                              @text_document)
     end
 

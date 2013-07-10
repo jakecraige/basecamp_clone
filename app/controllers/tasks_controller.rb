@@ -3,10 +3,10 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = Task.new
   end
+
   def create
     @list = List.find(params[:list_id])
-    @task = @list.tasks.new(params[:task])
-    @task.save
+    @task = @list.tasks.create(params[:task])
     redirect_to @list
   end
 
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update_attributes(params[:task])
-      redirect_to list_path(@task.list_id)
+      redirect_to list_path(@task.list)
     else
       render action: 'edit'
     end

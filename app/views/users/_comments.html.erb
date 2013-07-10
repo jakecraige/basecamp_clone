@@ -3,10 +3,11 @@
   <table class="full-table">
   <% @recent_comments.each do |comment| %>
     <tr>
-      <% @discussion = Discussion.find(comment.discussion_id) %>
+      <% #@discussion = Discussion.find(comment.discussion_id) %>
+      <% @discussion = comment.discussion %>
       <td><%= comment.body.truncate(30) %></td>
       <td>On: <%= link_to @discussion.title.truncate(30),
-                project_discussion_path(@discussion.project_id, @discussion) %></td>
+                project_discussion_path(@discussion.project, @discussion) %></td>
       <td>Posted <%= time_ago_in_words(comment.created_at) %> ago</td>
     </tr>
   <% end %>

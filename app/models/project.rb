@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
   validates_presence_of :user_id
 
   default_scope order("due ASC")
+  scope :active, where(status: true)
+  scope :archived, where(status: false)
 
   def is_owner?(user)
     user_id == user.id

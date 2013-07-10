@@ -1,12 +1,9 @@
 module ApplicationHelper
-  def get_name(id)
-    User.find(id).name
-  end
-  def link_name(id, options = {})
+  def link_name(user, options = {})
     if options.has_key?(:class)
-      link_to get_name(id), user_path(id), class: options[:class]
+      link_to user.name, user, class: options[:class]
     else
-      link_to get_name(id), user_path(id)
+      link_to user.name, user
     end
   end
 end

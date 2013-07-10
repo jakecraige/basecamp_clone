@@ -14,7 +14,7 @@
   <% end %>
   </p>
   <p class="created">
-    <%= link_name(@discussion.user_id) %> | 
+    <%= link_name(@discussion.user) %> | 
     Posted <%= time_ago_in_words(@discussion.created_at) %> ago
     <% if @discussion.is_owner?(current_user) %>
       | <%= link_to 'Edit', edit_project_discussion_path(@discussion.project_id, @discussion) %>
@@ -27,7 +27,7 @@
   <div class="well message">
     <p class="body"><%= comment.body %></p>
     <p class="created">
-      <%= link_name(comment.user_id) %> | 
+      <%= link_name(comment.user) %> | 
       Posted <%= time_ago_in_words(comment.created_at) %> ago
     <% if comment.is_owner?(current_user) %>
       | <%= link_to 'Edit', edit_comment_path(comment) %>

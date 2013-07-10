@@ -11,7 +11,7 @@
         <td><%= link_to text_document.title,
           project_text_document_path(text_document.project_id, text_document) %></td>
         <td>
-          by <%= link_name text_document.user_id %>
+          by <%= link_name text_document.user %>
       </tr>
     <% end %>
     </table>

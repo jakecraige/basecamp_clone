@@ -14,20 +14,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user  = User.find(params[:id])
     @title = @user.name
 
     user_projects = @user.projects
-    member_of = @user.member_of_project
+    member_of     = @user.member_of_project
 
-    @projects = user_projects + member_of
-    @comments = Comment.where(user_id: @user.id)
-    @discussions = Discussion.where(user_id: @user.id)
-    @recent_comments = @comments.limit(5)
+    @projects           = user_projects + member_of
+    @comments           = @user.comments
+    @discussions        = @user.discussions
+    @recent_comments    = @comments.limit(5)
     @recent_discussions = @discussions.limit(5)
 
-    arr = [@recent_comments, @recent_discussions]
-    @feeds = ActivityFeed::feed(arr, {caller: 'User'})
+    objects_for_feed_display = [@recent_comments, @recent_discussions]
+    @feeds = ActivityFeed::feed(objects_for_feed_display, 
+                                {caller: 'User'})
   end
 
   def create
@@ -35,8 +36,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the BaseCamp Clone!"
-      redirect_to @user
+      redirect_to @user, notice: "Welcome to the BaseCamp Clone!"
     else
       @title = "Sign Up"
       render 'new'
@@ -52,8 +52,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      flash[:success] = "Profile Updated."
-      redirect_to @user
+      redirect_to @user, notice: "Profile Updated.";
     else
       @title = "Edit User"
       render 'edit'

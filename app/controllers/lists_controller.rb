@@ -4,10 +4,10 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
-    @complete_tasks = @list.tasks.where(complete: 1)
-    @incomplete_tasks = @list.tasks.where("complete IS NOT 1")
-    @project = Project.find(@list.project_id)
+    @list             = List.find(params[:id])
+    @complete_tasks   = @list.tasks.completed
+    @incomplete_tasks = @list.tasks.not_completed
+    @project          = Project.find(@list.project_id)
   end
 
   def new

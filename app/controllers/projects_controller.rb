@@ -1,29 +1,29 @@
 class ProjectsController < ApplicationController
-  #before_filter :verify_member
   before_filter :authenticate
 
   def index
-    user_projects = current_user.projects
-    member_of = current_user.member_of_project
+    user_projects      = current_user.projects
+    member_of          = current_user.member_of_project
 
-    @active_projects = user_projects.where(status: true) + member_of.where(status: true)
-    @archived_projects = user_projects.where(status: false) + member_of.where(status: false)
+    @active_projects   = user_projects.active + member_of.active
+    @archived_projects = user_projects.archived + member_of.archived
 
     @title = "My Projects"
   end
 
   def show
     @project = Project.find(params[:id])
-    session[:project_id] = @project.id
     @title = @project.title
+    session[:project_id] = @project.id
 
-    @members = @project.members
-    @discussions = Discussion.where(project_id: @project)
-    @lists = List.where(project_id: @project)
-    @text_documents = TextDocument.where(project_id: @project)
+    @members        = @project.members
+    @discussions    = @project.discussions
+    @lists          = @project.lists
+    @text_documents = @project.text_documents
 
-    arr = [@discussions, @text_documents, @lists, @members]
-    @feeds = ActivityFeed::feed(arr)
+    objects_for_feed_display = [@discussions, @text_documents,
+                                @lists, @members]
+    @feeds = ActivityFeed::feed(objects_for_feed_display)
   end
 
   def new
@@ -70,10 +70,10 @@ class ProjectsController < ApplicationController
   end
 
   def add_member
-    #raise params.inspect
     project = Project.find(params[:project_id])
-    user = User.find_by_email(params[:user_email])
-    errors = []
+    user    = User.find_by_email(params[:user_email])
+    errors  = []
+
     if user && !user.nil?
       if params[:user_email] != project.user.email 
         if !project.members.include?(user)
@@ -89,8 +89,8 @@ class ProjectsController < ApplicationController
       errors = ["Could not find entered email."]
     end
     if errors.any?
-      flash[:error] = errors.join("<br>")
-      redirect_to project_members_path(params[:project_id])
+      redirect_to project_members_path(params[:project_id]),
+                    flash: { error: errors.join("<br>") }
     end
   end
 
@@ -106,14 +106,4 @@ class ProjectsController < ApplicationController
     redirect_to project_path(params[:project_id])
     
   end
-
-  private
-    def verify_member
-      redirect_to root_path unless is_member?(current_user)
-    end
-
-    def is_member?(user)
-      #@project = Project.find(params[:id])
-      #@project.users.all.include?(user)
-    end
 end

@@ -4,7 +4,7 @@
   <% @recent_discussions.each do |discussion| %>
     <tr>
       <td><%= link_to discussion.title.truncate(50),
-                project_discussion_path(discussion.project_id, discussion) %></td>
+                project_discussion_path(discussion.project, discussion) %></td>
       <td>Posted <%= time_ago_in_words(discussion.created_at) %> ago</td>
     </tr>
   <% end %>

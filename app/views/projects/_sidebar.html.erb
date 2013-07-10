@@ -23,7 +23,7 @@
 
 
 <h3>Owner</h2>
-<p><%= link_name(@project.user_id) %></p>
+<p><%= link_name(@project.user) %></p>
 
 <div id="members_heading">
   <h3>Members</h3>
@@ -42,7 +42,7 @@
     <table>
     <% @project.members.each do |member| %>
       <tr>
-        <td><%= link_name(member.id, class: "member") %></td>
+        <td><%= link_name(member, class: "member") %></td>
         <% if @project.is_owner?(current_user) %>
           <td><%= simple_form_for(@project, 
                     url: project_remove_member_path(@project.id, member.id),
