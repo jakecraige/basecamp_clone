@@ -1,0 +1,17 @@
+%h2 Recent Discussions
+- if @recent_discussions.any?
+  %table.full-table
+    - @recent_discussions.each do |discussion|
+      %tr
+        %td
+          = link_to discussion.title.truncate(50),
+                  project_discussion_path(discussion.project, discussion)
+        %td
+          Posted 
+          = time_ago_in_words(discussion.created_at) 
+          ago
+- else
+  %p
+    = @user.name 
+    does not have any discussions at this moment...
+

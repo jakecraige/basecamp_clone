@@ -1,0 +1,20 @@
+%h2 Recent Comments
+- if @recent_comments.any?
+  %table.full-table
+    - @recent_comments.each do |comment|
+      %tr
+        - @discussion = comment.discussion
+        %td= comment.body.truncate(30)
+        %td
+          On: 
+          = link_to @discussion.title.truncate(30),
+                  project_discussion_path(@discussion.project, @discussion)
+        %td
+          Posted 
+          = time_ago_in_words(comment.created_at)
+          ago
+- else
+  %p 
+    =@user.name 
+    does not have any comments at this moment...
+

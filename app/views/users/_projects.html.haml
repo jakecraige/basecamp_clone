@@ -1,0 +1,17 @@
+%h2 All Projects
+- if @projects.any? 
+  %table.full-table
+    - @projects.each do |project| 
+      %tr
+        %td= link_to project.title, project
+        %td 
+          Due in 
+          = distance_of_time_in_words(Time.now, project.due)
+        %td 
+          Project manager: 
+          = link_name(project.user) 
+- else 
+  = @user.name
+  does not have any projects at this moment...
+
+

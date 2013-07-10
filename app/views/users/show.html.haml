@@ -1,0 +1,17 @@
+.row
+  .span8
+    = render 'layouts/feed' 
+    = render 'projects' 
+    = render 'discussions' 
+    = render 'comments' 
+
+  <!-- Sidebar -->
+  .span3.well
+    = gravatar_for @user 
+    %br
+    %strong Name:
+    = @user.name
+    %br
+    %strong Joined: 
+    = @user.created_at.strftime("%b %d, %Y")
+    %br
