@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%h2= @discussion.title
+
+.well.message
+  %p.body= @discussion.message
+  - if @discussion.file?
+    %p.file
+      %i File:
+      = link_to File.basename(@discussion.file.path), @discussion.file.url
+  %p.created
+    = link_name(@discussion.user)
+    | Posted #{time_ago_in_words(@discussion.created_at)} ago
+    - if current_user.owns?(@discussion)
+      |
+      = link_to 'Edit', edit_project_discussion_path(@discussion.project_id, @discussion)
+
+= render 'comments/form'
+- @comments.each do |comment|
+  .well.message
+    %p.body= comment.body
+    %p.created
+      = link_name(comment.user)
+      | Posted #{time_ago_in_words(comment.created_at)} ago
+      - if current_user.owns?(comment)
+        | #{link_to 'Edit', edit_comment_path(comment)}
+
+= link_to 'Back', project_discussions_path

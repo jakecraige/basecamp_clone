@@ -9,6 +9,8 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
 gem "carrierwave"
+gem 'haml'
+gem 'devise'
 
 group :development do
   gem 'faker'

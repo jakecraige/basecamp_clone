@@ -1,0 +1,18 @@
+%h1.title= @text_document.title
+%p.info
+  By 
+  = link_name @text_document.user
+  on 
+  = @text_document.created_at.strftime("%a, %b %l, %Y %l:%M %p")
+  - if current_user.owns?(@text_document)
+    | 
+    = link_to "Edit", edit_project_text_document_path(@text_document.project, @text_document)
+%hr
+%p.body= @text_document.body
+- if @text_document.file?
+  %p.file
+    %i File:
+    = link_to File.basename(@text_document.file.path), @text_document.file.path
+
+.back
+  %p= link_to "Back to project", project_path(params[:project_id])

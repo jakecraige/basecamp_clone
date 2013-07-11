@@ -1,0 +1,9 @@
+= simple_form_for(@discussion, url: project_discussions_path) do |f|
+
+  .form-inputs
+    = f.input :title
+    = f.input :message
+    = f.input :file
+
+  .form-actions
+    = f.button :submit

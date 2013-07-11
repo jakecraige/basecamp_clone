@@ -7,10 +7,10 @@
 
   <!-- Sidebar -->
   .span3.well
-    = gravatar_for @user 
+    = gravatar_for @user
     %br
-    %strong Name:
-    = @user.name
+    %strong Email:
+    = @user.email
     %br
     %strong Joined: 
     = @user.created_at.strftime("%b %d, %Y")

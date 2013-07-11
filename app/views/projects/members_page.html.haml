@@ -1,0 +1,12 @@
+%h1
+  Add new user to 
+  = @project.title
+%p Enter the email of the person you want to add as a member of this project.
+= simple_form_for @project,
+                      url: { action: "add_member" },
+                      method: :post,
+                      html: { class: "form-inline" } do |f|
+  = text_field_tag "user_email", nil, placeholder: "Email Address",
+        data: {autocomplete_source: User.order(:email).map(&:email)}
+  = f.submit "Add", class: "btn btn-success"
+= link_to "Back to Project", @project, class: "btn btn-primary"
