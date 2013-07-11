@@ -1,5 +1,5 @@
 %h3 Recent Activity Feed
-- @feeds.each do |feed|
+- @feeds.try(:each) do |feed|
   %p
     - case feed[:type]
       - when "Discussion"

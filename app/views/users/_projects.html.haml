@@ -1,5 +1,5 @@
 %h2 All Projects
-- if @projects.any? 
+- if @projects.try(:any?) 
   %table.full-table
     - @projects.each do |project| 
       %tr

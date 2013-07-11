@@ -4,7 +4,7 @@
   = link_name @text_document.user
   on 
   = @text_document.created_at.strftime("%a, %b %l, %Y %l:%M %p")
-  - if current_user.owns?(@text_document)
+  - if current_user.owns?(@text_document) || current_user.is_admin?
     | 
     = link_to "Edit", edit_project_text_document_path(@text_document.project, @text_document)
 %hr

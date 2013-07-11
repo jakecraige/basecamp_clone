@@ -1,4 +1,4 @@
-- if current_user.owns?(@project)
+- if current_user.owns?(@project) || current_user.is_admin?
   = link_to 'Edit', edit_project_path(@project),
         class: "btn btn-info", id: "edit-btn"
   = simple_form_for(@project, url: project_toggle_status_path(@project.id) ) do |f|
@@ -23,7 +23,7 @@
 
 .members_heading
   %h3 Members
-  - if current_user.owns?(@project)
+  - if current_user.owns?(@project) || current_user.is_admin?
     = link_to "Add", project_members_path(@project), class: "btn btn-success"
   - else
     - if @project.members.include?(current_user)
@@ -36,7 +36,7 @@
       - @project.members.each do |member|
         %tr
           %td= link_name(member, class: "member")
-          - if current_user.owns?(@project)
+          - if current_user.owns?(@project) || current_user.is_admin?
             %td
               = simple_form_for(@project, 
                       url: project_remove_member_path(@project.id, member.id),
@@ -44,7 +44,7 @@
                 = f.submit "Remove", class: "btn btn-small"
   - else
     %p No members just yet...
-- if current_user.owns?(@project)
+- if current_user.owns?(@project) || current_user.is_admin?
   .destroy
     = link_to 'Destroy Project', @project,
       method: :delete, data: { confirm: 'Are you sure?' },

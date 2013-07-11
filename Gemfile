@@ -11,6 +11,8 @@ gem 'jquery-ui-rails'
 gem "carrierwave"
 gem 'haml'
 gem 'devise'
+gem 'cancan'
+gem 'easy_roles'
 
 group :development do
   gem 'faker'

@@ -11,7 +11,7 @@
   %p.created
     = link_name(@discussion.user)
     | Posted #{time_ago_in_words(@discussion.created_at)} ago
-    - if current_user.owns?(@discussion)
+    - if current_user.owns?(@discussion) || current_user.is_admin?
       |
       = link_to 'Edit', edit_project_discussion_path(@discussion.project_id, @discussion)
 
