@@ -1,0 +1,14 @@
+%h1 Editing discussion
+
+= simple_form_for(@discussion, url: project_discussion_path) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :message
+
+  .form-actions
+    = f.button :submit
+
+= link_to 'Show', project_discussions_path(@discussion)
+= link_to 'Back', project_discussions_path

@@ -37,7 +37,7 @@ class ActivityFeed < ActiveRecord::Base
         
         if hash[:caller] != 'User'
           if object.class != User && object.class != List && object.class != Task
-            creator = object.user.name
+            creator = object.user.email
           end
         end
 

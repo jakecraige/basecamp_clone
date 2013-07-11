@@ -1,0 +1,7 @@
+= simple_form_for(@comment) do |f|
+  .form-inputs
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :discussion_id, value: @discussion.id
+    = f.text_area :body
+  .form-actions
+    = f.submit "Submit Comment", class: "btn btn-success"

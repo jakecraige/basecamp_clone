@@ -1,0 +1,12 @@
+.block.lists
+  %h2 Todo Lists
+  = link_to "New List", new_list_path, class: "btn btn-success"
+  - if @lists.any?
+    - @lists.each do |list|
+      %p
+        =link_to list.title, list
+        |
+        = pluralize(list.tasks.not_completed.count, 'task')
+        incomplete
+  - else
+    %p No lists created yet...

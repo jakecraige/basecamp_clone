@@ -1,0 +1,25 @@
+%h1 Listing discussions
+
+%table
+  %tr
+    %th Title
+    %th Message
+    %th Project
+    %th User
+    %th
+    %th
+    %th
+
+- @discussions.each do |discussion|
+  %tr
+    %td= discussion.title %>
+    %td= discussion.message %>
+    %td= discussion.project_id %>
+    %td= discussion.user_id %>
+    %td= link_to 'Show', project_discussions_path %>
+    %td= link_to 'Edit', edit_project_discussion_path(discussion.project_id, discussion) %>
+    %td= link_to 'Destroy', project_discussions_path, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Discussion', new_project_discussion_path

@@ -1,0 +1,59 @@
+%h3 Recent Activity Feed
+- @feeds.each do |feed|
+  %p
+    - case feed[:type]
+      - when "Discussion"
+        - discussion = Discussion.find(feed[:id])
+        - project = discussion.project
+        - has_creator = TRUE
+        = feed[:type]
+        = link_to discussion.title, [project, discussion]
+      - when "User"
+        - user = User.find(feed[:id])
+        = link_to user.email, user
+      - when "List"
+        - list = List.find(feed[:id])
+        = feed[:type]
+        = link_to list.title, list
+      - when "Task"
+        - task = Task.find(feed[:id])
+        - list = task.list
+        - if feed[:action] == 'updated'
+          = feed[:type]
+        - else
+          = feed[:type] + ' - ' + task.body
+      - when "Comment"
+        - comment = Comment.find(feed[:id])
+        - has_creator = TRUE
+        - discussion = comment.discussion
+        - project = discussion.project
+        = feed[:type]
+      - when 'TextDocument'
+        - text_document = TextDocument.find(feed[:id])
+        - has_creator = TRUE
+        - project = text_document.project
+        = feed[:type].underscore.humanize
+    = feed[:action]
+
+    - case feed[:type]
+      - when 'Comment'
+        to 
+        = link_to discussion.title, [project, discussion]
+      - when 'Task'
+        - if task.complete?
+          in
+        - else
+          to
+          - if feed[:action] == 'updated'
+            = task.body
+            in
+        = link_to list.title, list
+      - when 'User'
+        to project 
+
+    - if has_creator && !feed[:creator].blank?
+      by 
+      = link_to feed[:creator], User.find_by_email(feed[:creator]) 
+    \-
+    = time_ago_in_words(feed[:time])
+    ago

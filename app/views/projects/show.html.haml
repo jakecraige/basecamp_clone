@@ -1,0 +1,16 @@
+.row
+  .span8
+    %h1= @project.title
+    %p#notice= notice
+
+    %p.description
+      = @project.description
+
+    = render 'layouts/feed'
+    = render 'discussions'
+    = render 'lists'
+    = render 'text_documents'
+    = render 'files'
+
+  .span3.well.sidebar
+    = render 'sidebar'

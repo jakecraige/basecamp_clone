@@ -1,0 +1,36 @@
+.action-index
+  %h1 My Projects
+  = link_to 'New Project', new_project_path,
+    class: "btn btn-primary",
+    id: "add-project-btn"
+
+  .active_projects.projects.block
+    %h2 Active Projects
+    - if @active_projects.any?
+      %table
+        - @active_projects.each do |project|
+          %tr
+            %td= link_to project.title, project
+            %td 
+              Due in 
+              = distance_of_time_in_words(Time.now, project.due)
+            %td 
+              Project manager: 
+              = link_name(project.user)
+    - else
+      %p You do not have any projects at this moment...
+  .archived_projects.projects.block
+    %h2 Archived Projects
+    - if @archived_projects.any?
+      %table
+        - @archived_projects.each do |project|
+          %tr
+            %td= link_to project.title, project
+            %td 
+              Due in 
+              = distance_of_time_in_words(Time.now, project.due)
+            %td 
+              Project manager: 
+              = link_name(project.user)
+    - else
+      %p You do not have any archived projects.

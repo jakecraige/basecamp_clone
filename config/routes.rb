@@ -1,5 +1,8 @@
 BasecampClone::Application.routes.draw do
 
+  devise_for :users
+
+  resources :users
   resources :lists do
     resources :tasks do
       member do
@@ -19,16 +22,15 @@ BasecampClone::Application.routes.draw do
     match '/status' => 'projects#toggle_status', as: :toggle_status
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :users
+  #resources :sessions, only: [:new, :create, :destroy]
 
   root :to => "projects#index"
 
   get "home/index"
 
-  match '/signup' => 'users#new'
-  match '/signin' => 'sessions#new'
-  match '/signout' => 'sessions#destroy'
+  #match '/signup' => 'users#new'
+  #match '/signin' => 'sessions#new'
+  #match '/signout' => 'sessions#destroy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
