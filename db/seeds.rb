@@ -11,20 +11,19 @@ Rake::Task['db:reset'].invoke
 lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 # Create Users
-user = User.create!(name: "Jake Craige",
+user = User.create!(
              email: "jake@poeticsystems.com",
-             password: "foobar",
-             password_confirmation: "foobar")
-user2 = User.create!(name: "Neal Naumann",
+             password: "foobarfoo",
+             password_confirmation: "foobarfoo")
+user2 = User.create!(
              email: "james.craige@gmail.com",
-             password: "foobar",
-             password_confirmation: "foobar")
+             password: "foobarfoo",
+             password_confirmation: "foobarfoo")
 
 30.times do |n|
-  name = Faker::Name.name
   email = "example#{n+1}@gmail.com"
-  password = "foobar"
-  User.create!(name: name,
+  password = "foobarfoo"
+  User.create!(
                email: email,
                password: password,
                password_confirmation: password)
