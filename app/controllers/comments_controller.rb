@@ -10,13 +10,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(params[:comment])
+    @comment    = Comment.new(params[:comment])
     @discussion = @comment.discussion
-      if @comment.save
+      if @comment.save!
         redirect_to project_discussion_path(@discussion.project, @discussion), notice: 'Comment was successfully created.'
       else
         render action: "new"
       end
+
+      return "wahtever"
   end
 
   def update
